@@ -25,18 +25,17 @@ listen stats
 
 frontend web-app
   bind *:80
-  {{with $d := key "backend/current"}}
-  {{if $d}}
-  default_backend {{$d}}
-  {{else}}
   default_backend default
-  {{end}}
-  {{end}}
+
 
 backend default
-  server s1 localhost:8080
-
-{{range $tag, $services := service "webapp" | byTag}}backend {{$tag}}
- balance roundrobin
-{{range $services}} server {{.ID}} {{.Address}}:{{.Port}}
+  balance roundrobin
+{{range $tag, $services := service "webapp" | byTag}}
+ {{with $d := key "backend/current"}}
+  {{if $d}}
+   {{if eq $tag $d}}
+    {{range $services}} server {{.ID}} {{.Address}}:{{.Port}}
+   {{end}}
+  {{end}}
+ {{end}}
 {{end}}{{end}}
