@@ -25,7 +25,11 @@ listen stats
 
 frontend web-app
   bind *:80
+  {{if key "backend/current"}}
   default_backend {{key "backend/current"}}
+  {{else}}
+  default_backend default
+  {{end}}
 
 backend default
   server s1 localhost:8080
