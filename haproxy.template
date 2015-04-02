@@ -31,6 +31,7 @@ frontend web-app
   {{else}}
   default_backend default
   {{end}}
+  {{end}}
 
 backend default
   server s1 localhost:8080
