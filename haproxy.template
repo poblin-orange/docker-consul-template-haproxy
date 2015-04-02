@@ -25,8 +25,9 @@ listen stats
 
 frontend web-app
   bind *:80
-  {{if key "backend/current"}}
-  default_backend {{key "backend/current"}}
+  {{with $d := key "backend/current"}}
+  {{if $d}}
+  default_backend {{$d}}
   {{else}}
   default_backend default
   {{end}}
