@@ -12,8 +12,6 @@ sed -i -e "s/webapp/${SERVICE_TAG}/g" $TEMPLATE
 
 haproxy -f "$CONFIG_FILE" -p "$PIDFILE" -D -st $(cat $PIDFILE)
 
-current=$(curl -X GET ${CONSUL_PORT_8500_TCP_ADDR:-172.17.42.1}:${CONSUL_PORT_8500_TCP_PORT:-8500}/v1/kv/backend/current)
-[[ -z "$current" ]] && sed -i -e "s/default_backend.*$/default_backend default/" $TEMPLATE
 
 env
 
