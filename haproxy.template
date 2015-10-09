@@ -30,12 +30,7 @@ frontend web-app
 
 backend default
   balance roundrobin
+  
 {{range $tag, $services := service "webapp" | byTag}}
- {{with $d := key "backend/current"}}
-  {{if $d}}
-   {{if eq $tag $d}}
     {{range $services}} server {{.ID}} {{.Address}}:{{.Port}}
-   {{end}}
-  {{end}}
- {{end}}
 {{end}}{{end}}
