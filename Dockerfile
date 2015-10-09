@@ -4,8 +4,9 @@ MAINTAINER Jason Kulatunga <jason@thesparktree.com>
 RUN \
   sed -i 's/^# \(.*-backports\s\)/\1/g' /etc/apt/sources.list && \
   apt-get update && \
-  apt-get install -y wget curl build-essential && \
-  apt-get build-dep -y haproxy=1.5.14-1~ubuntu14.04.1
+  apt-get install -y wget curl build-essential
+#   && \
+#  apt-get build-dep -y haproxy=1.5.14-1~ubuntu14.04.1
 
 RUN mkdir -p /tmp/haproxy/
 WORKDIR /tmp/haproxy/
