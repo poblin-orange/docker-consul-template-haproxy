@@ -8,7 +8,7 @@ $BACKEND_SERVICE=${$BACKEND_SERVICE:webapp}
 
 cd "$HAPROXY"
 
-sed -i -e "s/webapp/${$BACKEND_SERVICE}/g" $TEMPLATE
+sed -i -e "s/webapp/${BACKEND_SERVICE}/g" $TEMPLATE
 
 haproxy -f "$CONFIG_FILE" -p "$PIDFILE" -D -st $(cat $PIDFILE)
 
